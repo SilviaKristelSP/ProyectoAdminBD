@@ -13,12 +13,12 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" Margin="20">
+        <DataGrid x:Name="dgPersonas" Grid.Row="1" Margin="20" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre Completo" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Correo electrónico" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Teléfono" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Tarjeta de Crédito" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre Completo" Width="*" Binding="{Binding FullName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Correo electrónico" Width="*" Binding="{Binding EmailAddress}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Teléfono" Width="*" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Tarjeta de Crédito" Width="*" Binding="{Binding CardNumber}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Lista Personas" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="0,19,0,0"  Grid.Row="0"/>

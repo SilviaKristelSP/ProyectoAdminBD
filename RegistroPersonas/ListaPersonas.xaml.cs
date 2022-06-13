@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RegistroPersonas.Clases;
+using RegistroPersonas.Conexion;
 
 namespace RegistroPersonas
 {
@@ -23,6 +25,7 @@ namespace RegistroPersonas
         public ListaPersonas()
         {
             InitializeComponent();
+            cargarPersonas();
         }
 
         private void clicRegistrarNuevo(object sender, RoutedEventArgs e)
@@ -49,6 +52,20 @@ namespace RegistroPersonas
             else
             {
                 // If 'No', do something here. 
+            }
+        }
+
+        private void cargarPersonas()
+        {
+            List<Persona> personas = new List<Persona>();
+            personas = PersonaDAO.RecuperarPersonas();
+            if (personas != null)
+            {
+                dgPersonas.ItemsSource = personas;
+            }
+            else
+            {
+                MessageBox.Show("No hay personas registradas", "Sin personas");
             }
         }
     }
