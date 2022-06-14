@@ -22,9 +22,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Lista Personas" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="0,19,0,0"  Grid.Row="0"/>
-        <Button Content="Eliminar" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicEliminar"/>
-        <Button Content="Editar" HorizontalAlignment="Left" Margin="161,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicEditar"/>
-        <Button Content="Registrar Nuevo" HorizontalAlignment="Left" Margin="670,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicRegistrarNuevo"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicEliminar"/>
+        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="161,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicEditar"/>
+        <Button x:Name="btnRegistrar" Content="Registrar Nuevo" HorizontalAlignment="Left" Margin="670,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="110" Click="clicRegistrarNuevo"/>
+        <Button Content="Recargar" HorizontalAlignment="Left" Margin="690,19,0,0" VerticalAlignment="Top" Width="90" Click="clicRecargar"/>
 
     </Grid>
 </Window>

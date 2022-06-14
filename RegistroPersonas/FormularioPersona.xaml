@@ -69,5 +69,6 @@
         <Label Content="Año Expiración" HorizontalAlignment="Left" Margin="335,306,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Margin="555,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="122" Click="clicGuardar"/>
         <TextBox x:Name="tbAnio" HorizontalAlignment="Left" Margin="429,310,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="64"/>
+        <Button Content="Regresar" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Width="104" Click="clicRegresar"/>
     </Grid>
 </Window>

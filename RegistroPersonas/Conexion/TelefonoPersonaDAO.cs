@@ -99,7 +99,7 @@ namespace RegistroPersonas.Conexion
             {
                 try
                 {
-                    SqlCommand comando = new SqlCommand("Person.SPA_Person_PersonePhone", conexionBDTransacciones);
+                    SqlCommand comando = new SqlCommand("Person.SPA_Person_PersonPhone", conexionBDTransacciones);
                     comando.CommandType = CommandType.StoredProcedure;
 
 

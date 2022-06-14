@@ -105,7 +105,7 @@ namespace RegistroPersonas.Conexion
                     comando.CommandType = CommandType.StoredProcedure;
 
 
-                    comando.Parameters.AddWithValue("@CreditCard", card.Id);
+                    comando.Parameters.AddWithValue("@CreditCardID", card.Id);
                     comando.Parameters.AddWithValue("@CardType", card.CardType);
                     comando.Parameters.AddWithValue("@CardNumber", card.CardNumber);
                     comando.Parameters.AddWithValue("@ExpMonth", card.ExpMonth);

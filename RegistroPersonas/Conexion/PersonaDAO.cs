@@ -108,34 +108,61 @@ namespace RegistroPersonas.Conexion
 
             return respuestaInsercion;
         }
-        public static int RecuperarBusinessEntityID()
+
+        public static Persona RecuperarPersonaCompleta(int businessId)
         {
-            int BusinessEntityID = 0;
+            Persona personaBD = new Persona();
             SqlConnection conexionBD = ConexionBDConsultas.EstablecerConexion();
-            if (conexionBD != null)
+            if(conexionBD != null)
             {
                 try
                 {
-                    SqlCommand comando = new SqlCommand("Person.SPS_Person_GetBusinessEntityID", conexionBD);
+                    SqlCommand comando = new SqlCommand("Person.SPS_Person_FullPerson", conexionBD);
                     comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Add(new SqlParameter("@BusinessEntityID", businessId));
 
                     SqlDataReader resultadoBD = comando.ExecuteReader();
 
                     if (resultadoBD.Read())
                     {
-                        BusinessEntityID = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
+                        String firstN = "";
+                        String middleN = "";
+                        String lastN = "";
+                        personaBD.Id = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
+                        firstN = ((resultadoBD.IsDBNull(1)) ? "" : resultadoBD.GetString(1));
+                        personaBD.FirstName = firstN;
+                        middleN = ((resultadoBD.IsDBNull(2)) ? "" : resultadoBD.GetString(2));
+                        personaBD.MiddleName = middleN;
+                        lastN = ((resultadoBD.IsDBNull(3)) ? "" : resultadoBD.GetString(3));
+                        personaBD.LastName = lastN;
+                        personaBD.FullName = firstN + " " + middleN + " " + lastN;
+                        personaBD.PersonType = ((resultadoBD.IsDBNull(4)) ? "" : resultadoBD.GetString(4));
+                        personaBD.Title = ((resultadoBD.IsDBNull(5)) ? "" : resultadoBD.GetString(5));
+                        personaBD.EmailPromotion = ((resultadoBD.IsDBNull(6)) ? 0 : resultadoBD.GetInt32(6));
+                        personaBD.IdEmailAddress = ((resultadoBD.IsDBNull(7)) ? 0 : resultadoBD.GetInt32(7));
+                        personaBD.EmailAddress = ((resultadoBD.IsDBNull(8)) ? "" : resultadoBD.GetString(8));
+                        personaBD.PhoneNumber = ((resultadoBD.IsDBNull(9)) ? "" : resultadoBD.GetString(9));
+                        personaBD.PhoneNumberType = ((resultadoBD.IsDBNull(10)) ? 0 : resultadoBD.GetInt32(10));
+                        personaBD.IdCreditCard = ((resultadoBD.IsDBNull(11)) ? 0 : resultadoBD.GetInt32(11));
+                        personaBD.CardNumber = ((resultadoBD.IsDBNull(12)) ? "" : resultadoBD.GetString(12));
+                        personaBD.CardType = ((resultadoBD.IsDBNull(13)) ? "" : resultadoBD.GetString(13));
+                        personaBD.ExpMonth = ((resultadoBD.IsDBNull(14)) ? 0 : resultadoBD.GetByte(14));
+                        personaBD.ExpYear = ((resultadoBD.IsDBNull(15)) ? 0 : resultadoBD.GetInt16(15));
                     }
 
                     resultadoBD.Close();
                 }
                 catch(Exception ex)
                 {
-
-                } 
+                    personaBD = null;
+                }
 
             }
-
-            return BusinessEntityID;
+            else
+            {
+                personaBD = null;
+            }
+            return personaBD;
         }
 
         public static bool EditarPersona(Persona persona)
@@ -153,7 +180,7 @@ namespace RegistroPersonas.Conexion
                     int emailPromotion = 0;
 
                     comando.Parameters.AddWithValue("@BussinessEntityID", persona.Id);
-                    comando.Parameters.AddWithValue("@PersonType", "SC");
+                    comando.Parameters.AddWithValue("@PersonType", persona.PersonType);
                     comando.Parameters.AddWithValue("@NameStyle", false);
                     comando.Parameters.AddWithValue("@Title", persona.Title);
                     comando.Parameters.AddWithValue("@FirstName", persona.FirstName);
