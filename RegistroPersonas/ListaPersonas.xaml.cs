@@ -47,11 +47,25 @@ namespace RegistroPersonas
 
             if (confirmacionEliminacion == MessageBoxResult.Yes)
             {
-                MessageBox.Show("El registro de eliminó exitosamente", "Borrado exitoso");
-            }
-            else
-            {
-                // If 'No', do something here. 
+                if (dgPersonas.SelectedIndex > -1)
+                {
+                    bool resultado = false;
+                    resultado = PersonaDAO.EliminarPersona(((Persona)dgPersonas.SelectedValue).Id);
+                    MessageBox.Show(((Persona)dgPersonas.SelectedValue).Id.ToString());
+                    if (resultado)
+                    {
+                        
+                        MessageBox.Show("Eliminado Correctamente");
+                        cargarPersonas();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Registro eliminado correctamente");
+                    }
+
+                }
+                else MessageBox.Show("Debe seleccionar un celda valida para eliminar");
             }
         }
 
