@@ -61,7 +61,7 @@ namespace RegistroPersonas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/RegistroPersonas;component/listapersonas.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/RegistroPersonas;V1.0.0.0;component/listapersonas.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ListaPersonas.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
