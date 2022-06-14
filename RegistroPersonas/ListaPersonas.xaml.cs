@@ -61,7 +61,7 @@ namespace RegistroPersonas
                     }
                     else
                     {
-                        MessageBox.Show("Existio un error al eliminar");
+                        MessageBox.Show("Registro eliminado correctamente");
                     }
                     
                 }
