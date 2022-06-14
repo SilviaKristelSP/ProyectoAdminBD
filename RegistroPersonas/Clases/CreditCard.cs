@@ -10,6 +10,8 @@ namespace RegistroPersonas.Clases
     {
         public int Id { get; set; }
 
+        public int BusinessEntityID { get; set; }
+
         public string CardType { get; set; }
 
         public string CardNumber { get; set; }

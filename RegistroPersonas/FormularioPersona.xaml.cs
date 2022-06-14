@@ -19,9 +19,12 @@ namespace RegistroPersonas
     /// </summary>
     public partial class FormularioPersona : Window
     {
+        private String operacionARealizar;
+
         public FormularioPersona(String tipoOperacion)
         {
             InitializeComponent();
+            operacionARealizar = tipoOperacion;
             if (tipoOperacion.Equals("Registrar"))
             {
                 lbTitulo.Content = "Registro Persona";
@@ -29,11 +32,29 @@ namespace RegistroPersonas
             {
                 lbTitulo.Content = "Edición Persona";
             }
+            //FN = Nombre; MN: Paterno; LN: Materno
         }
 
         private void clicGuardar(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (operacionARealizar.Equals("Registrar"))
+            {
+                realizarRegistro();
+            }
+            else if (operacionARealizar.Equals("Editar"))
+            {
+                realizarEdicion();
+            }
+        }
+
+        private void realizarRegistro()
+        {
+
+        }
+
+        private void realizarEdicion()
+        {
+
         }
 
         private bool verificarCorreo()
@@ -45,6 +66,7 @@ namespace RegistroPersonas
             else
             {
                 return false;
+                MessageBox.Show("Escriba su correo eléctronico", "Error en los datos");
             }
         }
 
@@ -59,12 +81,13 @@ namespace RegistroPersonas
                 else
                 {
                     return false;
-                }
-                
+                    MessageBox.Show("El año de expiración debe ser mayor o igual al año actual", "Error en los datos");
+                } 
             }
             else
             {
                 return false;
+                MessageBox.Show("Llene todos los campos de la tarjeta de crédito", "Error en los datos");
             }
         }
 
@@ -77,18 +100,21 @@ namespace RegistroPersonas
             else
             {
                 return false;
+                MessageBox.Show("Llene todos los campos del número de télefono", "Error en los datos");
             }
         }
 
         private bool verificarPersona()
         {
-            if (cbTitulo.SelectedIndex >= 0 && tbNombre.Text != "" && tbApellidoMaterno.Text != "" && tbApellidoPaterno.Text != "")
+            if (tbNombre.Text != "" && tbApellidoMaterno.Text != "")
             {
                 return true;
+
             }
             else
             {
                 return false;
+                MessageBox.Show("Su Nombre y Apellido Materno son necesarios para el registro", "Error en los datos");
             }
         }
     }

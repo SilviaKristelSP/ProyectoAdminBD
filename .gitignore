@@ -3,4 +3,6 @@
 *.lref
 *.g.i.cs
 *.i.cache
+*.dll
+*.pdb
 

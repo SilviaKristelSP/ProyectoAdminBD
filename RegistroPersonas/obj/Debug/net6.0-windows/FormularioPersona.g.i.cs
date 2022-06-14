@@ -149,7 +149,7 @@ namespace RegistroPersonas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/RegistroPersonas;V1.0.0.0;component/formulariopersona.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/RegistroPersonas;component/formulariopersona.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\FormularioPersona.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
