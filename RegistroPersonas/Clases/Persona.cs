@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegistroPersonas.Clases
 {
-    internal class Persona
+    public class Persona
     {
         public int Id { get; set; }
 
@@ -43,5 +43,7 @@ namespace RegistroPersonas.Clases
         public int ExpMonth { get; set; }
 
         public int ExpYear { get; set; }
+
+        public int EmailPromotion { get; set; }
     }
 }

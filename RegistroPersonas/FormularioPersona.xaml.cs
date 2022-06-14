@@ -23,36 +23,88 @@ namespace RegistroPersonas
     public partial class FormularioPersona : Window
     {
         private String operacionARealizar;
+        Persona personaAEditar;
 
-        public FormularioPersona(String tipoOperacion)
+        public FormularioPersona(String tipoOperacion, Persona editable)
         {
             InitializeComponent();
             operacionARealizar = tipoOperacion;
+            personaAEditar = editable;
+
             if (tipoOperacion.Equals("Registrar"))
             {
                 lbTitulo.Content = "Registro Persona";
             } else if (tipoOperacion.Equals("Editar"))
             {
                 lbTitulo.Content = "Edición Persona";
+                tbNombre.Text = personaAEditar.FirstName;
+                tbApellidoMaterno.Text = personaAEditar.LastName;
+                tbApellidoPaterno.Text = personaAEditar.MiddleName;
+                tbCorreo.Text = personaAEditar.EmailAddress;
+                tbNumero.Text = personaAEditar.PhoneNumber;
+                tbNumeroTarjeta.Text = personaAEditar.CardNumber;
+                if (personaAEditar.IdCreditCard > 0)
+                {
+                    tbAnio.Text = personaAEditar.ExpYear.ToString();
+                    cbTipoTarjeta.Text = personaAEditar.CardType;
+                }
+                if (!personaAEditar.Title.Equals(""))
+                {
+                    cbTitulo.Text = personaAEditar.Title;
+                }
+                if (personaAEditar.PhoneNumberType > 0)
+                {
+                    switch (personaAEditar.PhoneNumberType)
+                    {
+                        case 1:
+                            cbTipoTelefono.Text = "Cell";
+                            break;
+                        case 2:
+                            cbTipoTelefono.Text = "Home";
+                            break;
+                        case 3:
+                            cbTipoTelefono.Text = "Work";
+                            break;
+                        default:
+                            cbTipoTelefono.Text = null;
+                            break;
+                    }
+                }
+                if(personaAEditar.ExpMonth > 0)
+                {
+                    cbMes.Text = personaAEditar.ExpMonth.ToString();
+                }
+
             }
-            //FN = Nombre; MN: Paterno; LN: Materno
         }
 
         private void clicGuardar(object sender, RoutedEventArgs e)
         {
             if (operacionARealizar.Equals("Registrar"))
             {
-                realizarRegistro();
+                if (realizarRegistro())
+                {
+                    ListaPersonas listaPersonas = new ListaPersonas();
+                    listaPersonas.Show();
+                    this.Close();
+                }
+                
             }
             else if (operacionARealizar.Equals("Editar"))
             {
-                realizarEdicion();
+                if (realizarEdicion())
+                {
+                    ListaPersonas listaPersonas = new ListaPersonas();
+                    listaPersonas.Show();
+                    this.Close();
+                }
             }
         }
 
-        private void realizarRegistro()
+        private bool realizarRegistro()
         {
-            if(verificarPersona() && verificarCorreo() && verificarTarjeta() && verificarTelefono())
+            bool respuesta = false;
+            if (verificarPersona() && verificarCorreo() && verificarTarjeta() && verificarTelefono())
             {
                 int id = obtenerBusinessEntityID(crearPersona());
                 if(id > 0)
@@ -60,19 +112,66 @@ namespace RegistroPersonas
                     registrarEmail(crearCorreo(), id);
                     registrarTarjeta(crearTarjeta(), id);
                     registrarTelefono(crearTelefono(), id);
-                    MessageBox.Show("Registro realizado exitosamente", id.ToString());
+                    MessageBox.Show("Registro realizado exitosamente");
                 }
                 else
                 {
                     MessageBox.Show("Hubo un error durante el registro", "Error");
                 }
-                
+                respuesta = true;
             }
+            return respuesta;
         }
 
-        private void realizarEdicion()
+        private bool realizarEdicion()
         {
+            bool respuesta = false;
+            if (verificarPersona() && verificarCorreo() && verificarTarjeta() && verificarTelefono())
+            {
+                int id = personaAEditar.Id;
+                if (id > 0)
+                {
+                    Email correoAEditar = crearCorreo();
+                    correoAEditar.EmailID = personaAEditar.IdEmailAddress;
+                    CreditCard tarjetaAEditar = crearTarjeta();
+                    tarjetaAEditar.Id = personaAEditar.IdCreditCard;
+                    TelefonoPersona telefonoAEditar = crearTelefono();
+                    telefonoAEditar.BusinessEntityID = personaAEditar.Id;
 
+                    actualizarDatosPersona();
+                    
+                    PersonaDAO.EditarPersona(personaAEditar);
+                    EmailDAO.EditarEmail(correoAEditar);
+                    TelefonoPersonaDAO.EditarTelefono(telefonoAEditar);
+
+                    if (tarjetaAEditar.Id > 0)
+                    {
+                        CreditCardDAO.EditarCreditCard(tarjetaAEditar);
+                    }
+                    else
+                    {
+                        tarjetaAEditar.BusinessEntityID = personaAEditar.Id;
+                        CreditCardDAO.RegistrarCreditCard(tarjetaAEditar);
+                    }
+
+                    MessageBox.Show("Edición realizada exitosamente");
+                    respuesta = true;
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error durante el registro", "Error");
+                }
+
+            }
+            return respuesta;
+        }
+
+        private void actualizarDatosPersona()
+        {
+            personaAEditar.Title = ((cbTitulo.SelectedIndex < 0) ? null : cbTitulo.Text);
+            personaAEditar.FirstName = tbNombre.Text;
+            personaAEditar.LastName = tbApellidoMaterno.Text;
+            personaAEditar.MiddleName = ((tbApellidoPaterno.Text == "") ? null : tbApellidoPaterno.Text);
         }
         
         //BUSINESSENTITYID DEL REGISTRO
@@ -111,7 +210,7 @@ namespace RegistroPersonas
         private Persona crearPersona()
         {
             Persona persona = new Persona();
-            persona.Title = ((cbTitulo.SelectedIndex < 0) ? null : cbTitulo.SelectedItem.ToString());
+            persona.Title = ((cbTitulo.SelectedIndex < 0) ? null : cbTitulo.Text);
             persona.FirstName = tbNombre.Text;
             persona.LastName = tbApellidoMaterno.Text;
             persona.MiddleName = ((tbApellidoPaterno.Text == "") ? null : tbApellidoPaterno.Text);
@@ -121,7 +220,7 @@ namespace RegistroPersonas
         private CreditCard crearTarjeta()
         {
             CreditCard tarjeta = new CreditCard();
-            tarjeta.CardType = cbTipoTarjeta.SelectedItem.ToString();
+            tarjeta.CardType = cbTipoTarjeta.Text;
             tarjeta.CardNumber = tbNumeroTarjeta.Text;
             tarjeta.ExpYear = Int32.Parse(tbAnio.Text);
             String mesExp = cbMes.Text;
@@ -175,14 +274,21 @@ namespace RegistroPersonas
             bool respuesta = false;
             if (cbTipoTarjeta.SelectedIndex >= 0 && cbMes.SelectedIndex >= 0 && tbNumeroTarjeta.Text != "" && tbAnio.Text != "")
             {
-                if (int.Parse(tbAnio.Text) >= 2022)
+                try
                 {
-                    respuesta = true;
+                    if (int.Parse(tbAnio.Text) >= 2022)
+                    {
+                        respuesta = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("El año de expiración debe ser mayor o igual al año actual", "Error en los datos");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    MessageBox.Show("El año de expiración debe ser mayor o igual al año actual", "Error en los datos");
-                } 
+                    MessageBox.Show("El año de expiración debe ser numerico", "Error en los datos");
+                }  
             }
             else if (cbTipoTarjeta.SelectedIndex >= 0 || cbMes.SelectedIndex >= 0 || tbNumeroTarjeta.Text != "" || tbAnio.Text != "")
             {
@@ -218,25 +324,11 @@ namespace RegistroPersonas
             }
         }
 
-        private bool comprobarEstructuraEmail(String email)
+        private void clicRegresar(object sender, RoutedEventArgs e)
         {
-            String expresion;
-            expresion = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-            if (Regex.IsMatch(email, expresion))
-            {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+            ListaPersonas listaPersonas = new ListaPersonas();
+            listaPersonas.Show();
+            this.Close();
         }
     }
 }
