@@ -61,9 +61,9 @@ namespace RegistroPersonas.Conexion
             return personasBD;
         }
 
-        public static bool RegistrarPersona(Persona persona)
+        public static int RegistrarPersona(Persona persona)
         {
-            bool respuestaInsercion = false;
+            int respuestaInsercion = -1;
             SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
 
             if (conexionBDTransacciones != null)
@@ -89,10 +89,14 @@ namespace RegistroPersonas.Conexion
                     salida.Direction = ParameterDirection.Output;
                     comando.Parameters.Add(salida);
 
+                    SqlParameter businessID = new SqlParameter("@BusinessID", SqlDbType.Int);
+                    businessID.Direction = ParameterDirection.Output;
+                    comando.Parameters.Add(businessID);
+
                     int hilerasAfectadas = comando.ExecuteNonQuery();
                     if (hilerasAfectadas > 0)
                     {
-                        respuestaInsercion = true;
+                        respuestaInsercion = Convert.ToInt32(comando.Parameters["@BusinessID"].Value);
                     }
                 }
                 catch(Exception ex)

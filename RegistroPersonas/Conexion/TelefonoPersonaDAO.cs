@@ -29,7 +29,7 @@ namespace RegistroPersonas.Conexion
                     while (resultadoBD.Read())
                     {
                         TelefonoPersona telefono = new TelefonoPersona();
-                        telefono.BusinnesEntityID = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
+                        telefono.BusinessEntityID = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
                         telefono.PhoneNumber = ((resultadoBD.IsDBNull(1)) ? "" : resultadoBD.GetString(1));
                         telefono.PhoneType = ((resultadoBD.IsDBNull(2)) ? 0 : resultadoBD.GetInt32(2));
                         TelefonoBD.Add(telefono);
@@ -64,9 +64,9 @@ namespace RegistroPersonas.Conexion
                     comando.CommandType = CommandType.StoredProcedure;
 
 
-                    comando.Parameters.AddWithValue("@BusinessEntityID", telefono.BusinnesEntityID);
+                    comando.Parameters.AddWithValue("@BusinessEntityID", telefono.BusinessEntityID);
                     comando.Parameters.AddWithValue("@PhoneNumber", telefono.PhoneNumber);
-                    comando.Parameters.AddWithValue("@PhoneNumber", telefono.PhoneType);
+                    comando.Parameters.AddWithValue("@PhoneNumberTypeID", telefono.PhoneType);
                     SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
                     estado.Direction = ParameterDirection.Output;
                     comando.Parameters.Add(estado);
@@ -103,7 +103,7 @@ namespace RegistroPersonas.Conexion
                     comando.CommandType = CommandType.StoredProcedure;
 
 
-                    comando.Parameters.AddWithValue("@BusinessEntityID", telefono.BusinnesEntityID);
+                    comando.Parameters.AddWithValue("@BusinessEntityID", telefono.BusinessEntityID);
                     comando.Parameters.AddWithValue("@PhoneNumber", telefono.PhoneNumber);
                     comando.Parameters.AddWithValue("@PhoneNumberTypeID", telefono.PhoneType);
                     SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
