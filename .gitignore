@@ -1,4 +1,6 @@
 .vs/
 *.cache
 *.lref
-
+*.dll
+*.pdb
+*.g.i.cs
