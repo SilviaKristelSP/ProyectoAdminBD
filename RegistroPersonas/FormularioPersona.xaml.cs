@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegistroPersonas.Clases;
+using RegistroPersonas.Conexion;
 
 namespace RegistroPersonas
 {
@@ -28,7 +31,7 @@ namespace RegistroPersonas
             if (tipoOperacion.Equals("Registrar"))
             {
                 lbTitulo.Content = "Registro Persona";
-            }else if (tipoOperacion.Equals("Editar"))
+            } else if (tipoOperacion.Equals("Editar"))
             {
                 lbTitulo.Content = "Edición Persona";
             }
@@ -49,14 +52,111 @@ namespace RegistroPersonas
 
         private void realizarRegistro()
         {
-
+            if(verificarPersona() && verificarCorreo() && verificarTarjeta() && verificarTelefono())
+            {
+                int id = obtenerBusinessEntityID(crearPersona());
+                if(id > 0)
+                {
+                    registrarEmail(crearCorreo(), id);
+                    registrarTarjeta(crearTarjeta(), id);
+                    registrarTelefono(crearTelefono(), id);
+                    MessageBox.Show("Registro realizado exitosamente", id.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error durante el registro", "Error");
+                }
+                
+            }
         }
 
         private void realizarEdicion()
         {
 
         }
+        
+        //BUSINESSENTITYID DEL REGISTRO
+        private int obtenerBusinessEntityID(Persona persona)
+        {
+            int id = PersonaDAO.RegistrarPersona(persona);
+            if ( id > 0)
+            {
+                return id;
+            }
+            else
+            {
+                return id;
+            }
+        }
 
+        private bool registrarTarjeta(CreditCard tarjeta, int businessEntityID)
+        {
+            tarjeta.BusinessEntityID = businessEntityID;
+            return CreditCardDAO.RegistrarCreditCard(tarjeta);
+        }
+
+        private bool registrarEmail(Email correo, int businessEntityID)
+        {
+            correo.BusinessEntityID = businessEntityID;
+            return EmailDAO.RegistrarEmail(correo);
+        }
+
+        private bool registrarTelefono(TelefonoPersona telefono, int businessEntityID)
+        {
+            telefono.BusinessEntityID = businessEntityID;
+            return TelefonoPersonaDAO.RegistrarTelefono(telefono);
+        }
+
+        //CREACIÓN AUXILIAR DE OBJETOS
+        private Persona crearPersona()
+        {
+            Persona persona = new Persona();
+            persona.Title = ((cbTitulo.SelectedIndex < 0) ? null : cbTitulo.SelectedItem.ToString());
+            persona.FirstName = tbNombre.Text;
+            persona.LastName = tbApellidoMaterno.Text;
+            persona.MiddleName = ((tbApellidoPaterno.Text == "") ? null : tbApellidoPaterno.Text);
+            return persona;
+        }
+
+        private CreditCard crearTarjeta()
+        {
+            CreditCard tarjeta = new CreditCard();
+            tarjeta.CardType = cbTipoTarjeta.SelectedItem.ToString();
+            tarjeta.CardNumber = tbNumeroTarjeta.Text;
+            tarjeta.ExpYear = Int32.Parse(tbAnio.Text);
+            String mesExp = cbMes.Text;
+            tarjeta.ExpMonth = Int32.Parse(mesExp);
+            return tarjeta;
+        }
+
+        private Email crearCorreo()
+        {
+            Email correo = new Email();
+            correo.EmailAddress = tbCorreo.Text;
+            return correo;
+        }
+
+        private TelefonoPersona crearTelefono()
+        {
+            TelefonoPersona telefono = new TelefonoPersona();
+            if(cbTipoTelefono.SelectedIndex == 0)
+            {
+                telefono.PhoneType = 1;
+            }
+            else if (cbTipoTelefono.SelectedIndex == 1)
+            {
+                telefono.PhoneType = 2;
+            }
+            else if(cbTipoTelefono.SelectedIndex == 2)
+            {
+                telefono.PhoneType = 3;
+            }
+            telefono.PhoneNumber = tbNumero.Text;
+
+            return telefono;
+        }
+
+        //VERIFICACIONES FORMULARIO
         private bool verificarCorreo()
         {
             if(tbCorreo.Text != "")
@@ -65,30 +165,30 @@ namespace RegistroPersonas
             }
             else
             {
-                return false;
                 MessageBox.Show("Escriba su correo eléctronico", "Error en los datos");
+                return false;
             }
         }
 
         private bool verificarTarjeta()
         {
+            bool respuesta = false;
             if (cbTipoTarjeta.SelectedIndex >= 0 && cbMes.SelectedIndex >= 0 && tbNumeroTarjeta.Text != "" && tbAnio.Text != "")
             {
-                if(int.Parse(tbAnio.Text) >= 2022)
+                if (int.Parse(tbAnio.Text) >= 2022)
                 {
-                    return true;
+                    respuesta = true;
                 }
                 else
                 {
-                    return false;
                     MessageBox.Show("El año de expiración debe ser mayor o igual al año actual", "Error en los datos");
                 } 
             }
-            else
+            else if (cbTipoTarjeta.SelectedIndex >= 0 || cbMes.SelectedIndex >= 0 || tbNumeroTarjeta.Text != "" || tbAnio.Text != "")
             {
-                return false;
                 MessageBox.Show("Llene todos los campos de la tarjeta de crédito", "Error en los datos");
             }
+            return respuesta;
         }
 
         private bool verificarTelefono()
@@ -99,8 +199,8 @@ namespace RegistroPersonas
             }
             else
             {
-                return false;
                 MessageBox.Show("Llene todos los campos del número de télefono", "Error en los datos");
+                return false;
             }
         }
 
@@ -113,8 +213,29 @@ namespace RegistroPersonas
             }
             else
             {
-                return false;
                 MessageBox.Show("Su Nombre y Apellido Materno son necesarios para el registro", "Error en los datos");
+                return false;
+            }
+        }
+
+        private bool comprobarEstructuraEmail(String email)
+        {
+            String expresion;
+            expresion = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }

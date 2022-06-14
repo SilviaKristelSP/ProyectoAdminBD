@@ -64,7 +64,7 @@ namespace RegistroPersonas.Conexion
                     SqlCommand comando = new SqlCommand("Sales.SPI_Sales_CreditCard", conexionBDTransacciones);
                     comando.CommandType = CommandType.StoredProcedure;
 
-                    comando.Parameters.AddWithValue("@BusinessEntityID", card.CardType);
+                    comando.Parameters.AddWithValue("@BusinessEntityID", card.BusinessEntityID);
                     comando.Parameters.AddWithValue("@CardType", card.CardType);
                     comando.Parameters.AddWithValue("@CardNumber", card.CardNumber);
                     comando.Parameters.AddWithValue("@ExpMonth", card.ExpMonth);

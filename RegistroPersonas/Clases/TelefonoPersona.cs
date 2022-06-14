@@ -8,7 +8,7 @@ namespace RegistroPersonas.Clases
 {
     internal class TelefonoPersona
     {
-        public int BusinnesEntityID { set; get; }
+        public int BusinessEntityID { set; get; }
 
         public string PhoneNumber { set; get; }
 
