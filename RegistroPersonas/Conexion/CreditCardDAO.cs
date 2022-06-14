@@ -11,7 +11,7 @@ namespace RegistroPersonas.Conexion
 {
     internal class CreditCardDAO
     {
-        public static List<CreditCard> RecuperarEmails(int CreditCardID)
+        public static List<CreditCard> RecuperarCreditCard(int CreditCardID)
         {
             List<CreditCard> CardBD = new List<CreditCard>();
             SqlConnection conexionBD = ConexionBDConsultas.EstablecerConexion();
@@ -42,6 +42,38 @@ namespace RegistroPersonas.Conexion
                 CardBD = null;
             }
             return CardBD;
+        }
+
+        public static bool RegistrarCreditCard(CreditCard card)
+        {
+            bool respuestaInsercion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                SqlCommand comando = new SqlCommand("Sales.SPI_Sales_CreditCard", conexionBDTransacciones);
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@BusinessEntityID", card.CardType);
+                comando.Parameters.AddWithValue("@CardType", card.CardType);
+                comando.Parameters.AddWithValue("@CardNumber", card.CardNumber);
+                comando.Parameters.AddWithValue("@ExpMonth", card.ExpMonth);
+                comando.Parameters.AddWithValue("@ExpYear", card.ExpYear);
+                SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                estado.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(estado);
+                SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                salida.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(salida);
+
+                int hilerasAfectadas = comando.ExecuteNonQuery();
+                if (hilerasAfectadas > 0)
+                {
+                    respuestaInsercion = true;
+                }
+            }
+
+            return respuestaInsercion;
         }
     }
 

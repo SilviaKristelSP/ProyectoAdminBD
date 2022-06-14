@@ -41,5 +41,34 @@ namespace RegistroPersonas.Conexion
             }
             return EmailBD;
         }
+        public static bool RegistrarEmail(Email email)
+        {
+            bool respuestaInsercion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                SqlCommand comando = new SqlCommand("Person.SPI_Person_EmailAddress", conexionBDTransacciones);
+                comando.CommandType = CommandType.StoredProcedure;
+
+
+                comando.Parameters.AddWithValue("@BusinessEntityID", email.BusinessEntityID);
+                comando.Parameters.AddWithValue("@EmailAddress", email.EmailAddress);
+                SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                estado.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(estado);
+                SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                salida.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(salida);
+
+                int hilerasAfectadas = comando.ExecuteNonQuery();
+                if (hilerasAfectadas > 0)
+                {
+                    respuestaInsercion = true;
+                }
+            }
+
+            return respuestaInsercion;
+        }
     }
 }

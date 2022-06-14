@@ -12,7 +12,6 @@ namespace RegistroPersonas.Conexion
     internal class TelefonoPersonaDAO
     {
 
-
         public static List<TelefonoPersona> RecuperarTelefonos(int BusinessEntityID)
         {
             List<TelefonoPersona> TelefonoBD = new List<TelefonoPersona>();
@@ -42,6 +41,37 @@ namespace RegistroPersonas.Conexion
                 TelefonoBD = null;
             }
             return TelefonoBD;
+        }
+
+        public static bool RegistrarTelefono(TelefonoPersona telefono)
+        {
+            bool respuestaInsercion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                SqlCommand comando = new SqlCommand("Person.SPI_Person_PersonPhone", conexionBDTransacciones);
+                comando.CommandType = CommandType.StoredProcedure;
+
+
+                comando.Parameters.AddWithValue("@BusinessEntityID", telefono.BusinnesEntityID);
+                comando.Parameters.AddWithValue("@PhoneNumber", telefono.PhoneNumber);
+                comando.Parameters.AddWithValue("@PhoneNumber", telefono.PhoneType);
+                SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                estado.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(estado);
+                SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                salida.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(salida);
+
+                int hilerasAfectadas = comando.ExecuteNonQuery();
+                if (hilerasAfectadas > 0)
+                {
+                    respuestaInsercion = true;
+                }
+            }
+
+            return respuestaInsercion;
         }
     }
 }
