@@ -1,4 +1,5 @@
 ﻿using RegistroPersonas.Clases;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,24 +17,32 @@ namespace RegistroPersonas.Conexion
             SqlConnection conexionBD = ConexionBDConsultas.EstablecerConexion();
             if (conexionBD != null)
             {
-                SqlCommand comando = new SqlCommand("Person.SPS_Person.EmailAddress", conexionBD);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.Add(new SqlParameter("@BusinessEntityID", BusinessEntityID));
-
-                SqlDataReader resultadoBD = comando.ExecuteReader();
-
-                while (resultadoBD.Read())
+                try
                 {
-                    Email email = new Email();
-                    email.BusinessEntityID = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
-                    email.EmailID = ((resultadoBD.IsDBNull(1)) ? 0 : resultadoBD.GetInt32(1));
-                    email.EmailAddress = ((resultadoBD.IsDBNull(2)) ? "" : resultadoBD.GetString(2));
-                    email.rowguid = ((resultadoBD.IsDBNull(3)) ? "" : resultadoBD.GetString(3));
-                    EmailBD.Add(email);
+                    SqlCommand comando = new SqlCommand("Person.SPS_Person.EmailAddress", conexionBD);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.Add(new SqlParameter("@BusinessEntityID", BusinessEntityID));
+
+                    SqlDataReader resultadoBD = comando.ExecuteReader();
+
+                    while (resultadoBD.Read())
+                    {
+                        Email email = new Email();
+                        email.BusinessEntityID = ((resultadoBD.IsDBNull(0)) ? 0 : resultadoBD.GetInt32(0));
+                        email.EmailID = ((resultadoBD.IsDBNull(1)) ? 0 : resultadoBD.GetInt32(1));
+                        email.EmailAddress = ((resultadoBD.IsDBNull(2)) ? "" : resultadoBD.GetString(2));
+                        email.rowguid = ((resultadoBD.IsDBNull(3)) ? "" : resultadoBD.GetString(3));
+                        EmailBD.Add(email);
+
+                    }
+
+                    resultadoBD.Close();
+                }
+                catch (Exception ex)
+                {
 
                 }
-
-                resultadoBD.Close();
+                
             }
             else
             {
@@ -48,27 +57,73 @@ namespace RegistroPersonas.Conexion
 
             if (conexionBDTransacciones != null)
             {
-                SqlCommand comando = new SqlCommand("Person.SPI_Person_EmailAddress", conexionBDTransacciones);
-                comando.CommandType = CommandType.StoredProcedure;
-
-
-                comando.Parameters.AddWithValue("@BusinessEntityID", email.BusinessEntityID);
-                comando.Parameters.AddWithValue("@EmailAddress", email.EmailAddress);
-                SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
-                estado.Direction = ParameterDirection.Output;
-                comando.Parameters.Add(estado);
-                SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
-                salida.Direction = ParameterDirection.Output;
-                comando.Parameters.Add(salida);
-
-                int hilerasAfectadas = comando.ExecuteNonQuery();
-                if (hilerasAfectadas > 0)
+                try
                 {
-                    respuestaInsercion = true;
+                    SqlCommand comando = new SqlCommand("Person.SPI_Person_EmailAddress", conexionBDTransacciones);
+                    comando.CommandType = CommandType.StoredProcedure;
+
+
+                    comando.Parameters.AddWithValue("@BusinessEntityID", email.BusinessEntityID);
+                    comando.Parameters.AddWithValue("@EmailAddress", email.EmailAddress);
+                    SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                    estado.Direction = ParameterDirection.Output;
+                    comando.Parameters.Add(estado);
+                    SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                    salida.Direction = ParameterDirection.Output;
+                    comando.Parameters.Add(salida);
+
+                    int hilerasAfectadas = comando.ExecuteNonQuery();
+                    if (hilerasAfectadas > 0)
+                    {
+                        respuestaInsercion = true;
+                    }
                 }
+                catch(Exception ex)
+                {
+
+                }
+                
             }
 
             return respuestaInsercion;
+        }
+
+        public static bool EditarEmail(Email email)
+        {
+            bool respuestaEdicion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                try
+                {
+                    SqlCommand comando = new SqlCommand("Person.SPA_Person_EmailAddress", conexionBDTransacciones);
+                    comando.CommandType = CommandType.StoredProcedure;
+
+
+                    comando.Parameters.AddWithValue("@EmailAddressID", email.EmailID);
+                    comando.Parameters.AddWithValue("@EmailAddress", email.EmailAddress);
+                    SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                    estado.Direction = ParameterDirection.Output;
+                    comando.Parameters.Add(estado);
+                    SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                    salida.Direction = ParameterDirection.Output;
+                    comando.Parameters.Add(salida);
+
+                    int hilerasAfectadas = comando.ExecuteNonQuery();
+                    if (hilerasAfectadas > 0)
+                    {
+                        respuestaEdicion = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                
+            }
+
+            return respuestaEdicion;
         }
     }
 }
