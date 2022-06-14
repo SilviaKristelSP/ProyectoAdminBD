@@ -89,5 +89,30 @@ namespace RegistroPersonas.Conexion
 
             return respuestaInsercion;
         }
+
+
+
+        public static bool EliminarPersona(int BusinesID) 
+        {
+            bool respuestaEliminacion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                try
+                {
+                    SqlCommand comando = new SqlCommand("Person.SPE_Person_Person", conexionBDTransacciones);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@BusinessEntityID", BusinesID);
+                    comando.ExecuteNonQuery();
+                    respuestaEliminacion = true;
+                }
+                catch (Exception e) {
+
+                    respuestaEliminacion = false;
+                }
+            }
+           return respuestaEliminacion;
+        }
     }
 }

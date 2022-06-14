@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {}
+    "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {
+    "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
+        "projectUniqueName": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
         "projectName": "RegistroPersonas",
-        "projectPath": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\obj\\",
+        "projectPath": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
+        "packagesPath": "C:\\Users\\jhoni\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhoni\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,12 +39,6 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "dependencies": {
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -55,15 +49,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WPF": {
-              "privateAssets": "none"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RegistroPersonas.Clases;
 using RegistroPersonas.Conexion;
+using static RegistroPersonas.Conexion.PersonaDAO;
 
 namespace RegistroPersonas
 {
@@ -47,7 +48,24 @@ namespace RegistroPersonas
 
             if (confirmacionEliminacion == MessageBoxResult.Yes)
             {
-                MessageBox.Show("El registro de eliminó exitosamente", "Borrado exitoso");
+                if (dgPersonas.SelectedIndex > -1)
+                {
+                    bool resultado = false;
+                    resultado = EliminarPersona(((Persona)dgPersonas.SelectedValue).Id);
+
+                    if (resultado)
+                    {
+
+                        MessageBox.Show("Eliminado Correctamente");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Existio un error al eliminar");
+                    }
+                    
+                }
+                else MessageBox.Show("Debe seleccionar un celda valida para eliminar");
             }
             else
             {
