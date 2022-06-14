@@ -35,5 +35,53 @@ namespace RegistroPersonas
         {
             this.Close();
         }
+
+        private bool verificarCorreo()
+        {
+            if(tbCorreo.Text != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool verificarTarjeta()
+        {
+            if (cbTipoTarjeta.SelectedIndex >= 0 && cbMes.SelectedIndex >= 0 && tbNumeroTarjeta.Text != "" && tbAnio.Text != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool verificarTelefono()
+        {
+            if (cbTipoTelefono.SelectedIndex >= 0 && tbNumero.Text != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool verificarPersona()
+        {
+            if (cbTitulo.SelectedIndex >= 0 && tbNombre.Text != "" && tbApellidoMaterno.Text != "" && tbApellidoPaterno.Text != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

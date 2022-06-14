@@ -53,5 +53,41 @@ namespace RegistroPersonas.Conexion
             }
             return personasBD;
         }
+
+        public static bool RegistrarPersona(Persona persona)
+        {
+            bool respuestaInsercion = false;
+            SqlConnection conexionBDTransacciones = ConexionBDTransacciones.EstablecerConexion();
+
+            if (conexionBDTransacciones != null)
+            {
+                SqlCommand comando = new SqlCommand("Person.SPI_Person_Person", conexionBDTransacciones);
+                comando.CommandType = CommandType.StoredProcedure;
+
+                int emailPromotion = 0;
+
+                comando.Parameters.AddWithValue("@PersonType", "SC");
+                comando.Parameters.AddWithValue("@NameStyle", false);
+                comando.Parameters.AddWithValue("@Title", persona.Title);
+                comando.Parameters.AddWithValue("@FirstName", persona.FirstName);
+                comando.Parameters.AddWithValue("@MiddleName", persona.MiddleName);
+                comando.Parameters.AddWithValue("@LastName", persona.LastName);
+                comando.Parameters.AddWithValue("@EmailPromotion", emailPromotion);
+                SqlParameter estado = new SqlParameter("@Estado", SqlDbType.Int);
+                estado.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(estado);
+                SqlParameter salida = new SqlParameter("@Salida", SqlDbType.VarChar, 65535);
+                salida.Direction = ParameterDirection.Output;
+                comando.Parameters.Add(salida);
+
+                int hilerasAfectadas = comando.ExecuteNonQuery();
+                if(hilerasAfectadas > 0)
+                {
+                    respuestaInsercion = true;
+                }
+            }
+
+            return respuestaInsercion;
+        }
     }
 }
