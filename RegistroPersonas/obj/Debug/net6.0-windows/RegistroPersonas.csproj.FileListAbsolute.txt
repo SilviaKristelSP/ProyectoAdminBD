@@ -51,3 +51,33 @@ C:\Users\User\Desktop\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\
 C:\Users\User\Desktop\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\User\Desktop\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\User\Desktop\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.csproj.CopyComplete
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\RegistroPersonas.exe
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\RegistroPersonas.deps.json
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\RegistroPersonas.runtimeconfig.json
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\RegistroPersonas.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\RegistroPersonas.pdb
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.csproj.AssemblyReference.cache
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\FormularioPersona.g.cs
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\ListaPersonas.g.cs
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas_MarkupCompile.cache
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas_MarkupCompile.lref
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\FormularioPersona.baml
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\ListaPersonas.baml
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.g.resources
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.AssemblyInfoInputs.cache
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.AssemblyInfo.cs
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.csproj.CoreCompileInputs.cache
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.csproj.CopyComplete
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\refint\RegistroPersonas.dll
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.pdb
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\RegistroPersonas.genruntimeconfig.cache
+C:\Users\jhoni\Documents\10mo semestre\BD\ProyectoPrograma\ProyectoAdminBD\RegistroPersonas\obj\Debug\net6.0-windows\ref\RegistroPersonas.dll

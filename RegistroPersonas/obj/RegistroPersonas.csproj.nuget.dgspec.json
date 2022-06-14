@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {}
+    "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {
+    "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
+        "projectUniqueName": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
         "projectName": "RegistroPersonas",
-        "projectPath": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\ProyectoAdminBD\\RegistroPersonas\\obj\\",
+        "projectPath": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\RegistroPersonas.csproj",
+        "packagesPath": "C:\\Users\\jhoni\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jhoni\\Documents\\10mo semestre\\BD\\ProyectoPrograma\\ProyectoAdminBD\\RegistroPersonas\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jhoni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
