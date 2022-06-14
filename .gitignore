@@ -1,4 +1,6 @@
-.vs/
+.vs/*
 *.cache
 *.lref
+*.g.i.cs
+*.i.cache
 

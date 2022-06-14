@@ -52,7 +52,15 @@ namespace RegistroPersonas
         {
             if (cbTipoTarjeta.SelectedIndex >= 0 && cbMes.SelectedIndex >= 0 && tbNumeroTarjeta.Text != "" && tbAnio.Text != "")
             {
-                return true;
+                if(int.Parse(tbAnio.Text) >= 2022)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
             else
             {
